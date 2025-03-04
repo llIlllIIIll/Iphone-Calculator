@@ -1,69 +1,77 @@
-let display = document.getElementById("display");
-let currentInput = "";
-let operator = "";
+const display = document.querySelector('.display');
+let currentInput = '0';
+let operator = null;
 let firstOperand = null;
-let shouldResetDisplay = false;
 
-// 숫자 입력
-function appendNumber(number) {
-    if (shouldResetDisplay) {
-        currentInput = "";
-        shouldResetDisplay = false;
+document.querySelectorAll('.btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const value = button.innerText;
+
+        if (!isNaN(value) || value === '.') {
+            handleNumber(value);
+        } else if (value === 'AC') {
+            resetCalculator();
+        } else if (value === '+/-') {
+            toggleSign();
+        } else if (value === '%') {
+            applyPercentage();
+        } else if (value === '=') {
+            calculateResult();
+        } else {
+            handleOperator(value);
+        }
+        updateDisplay();
+    });
+});
+
+function handleNumber(value) {
+    if (currentInput === '0' && value !== '.') {
+        currentInput = value;
+    } else {
+        currentInput += value;
     }
-    currentInput += number;
-    updateDisplay();
 }
 
-// 연산자 설정
-function setOperator(op) {
+function handleOperator(value) {
     if (firstOperand === null) {
         firstOperand = parseFloat(currentInput);
+        operator = value;
+        currentInput = '0';
     } else {
         calculateResult();
+        operator = value;
     }
-    operator = op;
-    shouldResetDisplay = true;
 }
 
-// 결과 계산
 function calculateResult() {
-    if (firstOperand === null || operator === "") return;
+    if (firstOperand === null || operator === null) return;
 
     let secondOperand = parseFloat(currentInput);
-    let result = 0;
-
     switch (operator) {
-        case "+":
-            result = firstOperand + secondOperand;
-            break;
-        case "-":
-            result = firstOperand - secondOperand;
-            break;
-        case "*":
-            result = firstOperand * secondOperand;
-            break;
-        case "/":
-            result = secondOperand !== 0 ? firstOperand / secondOperand : "오류";
-            break;
+        case '+': firstOperand += secondOperand; break;
+        case '−': firstOperand -= secondOperand; break;
+        case '×': firstOperand *= secondOperand; break;
+        case '÷': firstOperand /= secondOperand; break;
     }
 
-    firstOperand = result;
-    currentInput = result.toString();
-    operator = "";
-    shouldResetDisplay = true;
-    updateDisplay();
+    currentInput = firstOperand.toString();
+    operator = null;
 }
 
-// 화면 업데이트 (3자리마다 콤마 추가)
-function updateDisplay() {
-    display.textContent = parseFloat(currentInput).toLocaleString("ko-KR");
-}
-
-// 화면 초기화
-function clearDisplay() {
-    currentInput = "";
+function resetCalculator() {
+    currentInput = '0';
+    operator = null;
     firstOperand = null;
-    operator = "";
-    shouldResetDisplay = false;
-    display.textContent = "0";
+}
+
+function toggleSign() {
+    currentInput = (parseFloat(currentInput) * -1).toString();
+}
+
+function applyPercentage() {
+    currentInput = (parseFloat(currentInput) / 100).toString();
+}
+
+function updateDisplay() {
+    display.innerText = parseFloat(currentInput).toLocaleString();
 }
