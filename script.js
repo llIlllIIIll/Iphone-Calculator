@@ -39,13 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
             case "+":
                 result = prev + curr;
                 break;
-            case "−":
+            case "-":
                 result = prev - curr;
                 break;
-            case "×":
+            case "*":
                 result = prev * curr;
                 break;
-            case "÷":
+            case "/":
                 result = prev / curr;
                 break;
             default:
@@ -81,27 +81,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll(".number").forEach(button => {
         button.addEventListener("click", () => {
-            handleNumber(button.textContent);
+            handleNumber(button.dataset.value);
         });
     });
 
     document.querySelectorAll(".operator").forEach(button => {
         button.addEventListener("click", () => {
-            if (button.textContent === "=") {
+            if (button.dataset.value === "=") {
                 calculate();
             } else {
-                handleOperator(button.textContent);
+                handleOperator(button.dataset.value);
             }
         });
     });
 
     document.querySelectorAll(".utility").forEach(button => {
         button.addEventListener("click", () => {
-            if (button.textContent === "AC") {
+            if (button.dataset.value === "AC") {
                 resetCalculator();
-            } else if (button.textContent === "+/-") {
+            } else if (button.dataset.value === "+/-") {
                 toggleSign();
-            } else if (button.textContent === "%") {
+            } else if (button.dataset.value === "%") {
                 percentage();
             }
         });
