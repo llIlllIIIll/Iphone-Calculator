@@ -59,7 +59,7 @@ body {
 }
 
 .btn:active {
-    transform: scale(0.95);
+    transform: scale(0.9);
 }
 
 .orange { background-color: #ff9500; color: white; }

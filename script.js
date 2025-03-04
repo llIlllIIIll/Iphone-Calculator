@@ -59,20 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
         operator = null;
     }
 
-    function resetCalculator() {
-        currentInput = "0";
-        firstOperand = null;
-        operator = null;
-    }
-
-    function toggleSign() {
-        currentInput = (parseFloat(currentInput) * -1).toString();
-    }
-
-    function applyPercentage() {
-        currentInput = (parseFloat(currentInput) / 100).toString();
-    }
-
     function updateScreen() {
         screen.textContent = parseFloat(currentInput).toLocaleString();
     }
