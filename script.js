@@ -1,109 +1,79 @@
 document.addEventListener("DOMContentLoaded", () => {
     const screen = document.getElementById("screen");
-    let currentInput = "";
-    let operator = "";
-    let previousInput = "";
+    let currentInput = "0";
+    let operator = null;
+    let firstOperand = null;
 
-    function updateScreen(value) {
-        screen.textContent = value;
-    }
+    document.querySelectorAll(".btn").forEach(button => {
+        button.addEventListener("click", () => {
+            const value = button.dataset.value;
 
-    function handleNumber(num) {
-        if (currentInput.length < 9) {
-            currentInput += num;
-            updateScreen(currentInput);
-        }
-    }
+            if (!isNaN(value) || value === ".") {
+                handleNumber(value);
+            } else if (value === "AC") {
+                resetCalculator();
+            } else if (value === "+/-") {
+                toggleSign();
+            } else if (value === "%") {
+                applyPercentage();
+            } else if (value === "=") {
+                calculateResult();
+            } else {
+                handleOperator(value);
+            }
+            updateScreen();
+        });
+    });
 
-    function handleOperator(op) {
-        if (currentInput === "" && previousInput === "") return;
-
-        if (previousInput !== "") {
-            calculate();
+    function handleNumber(value) {
+        if (currentInput === "0" && value !== ".") {
+            currentInput = value;
         } else {
-            previousInput = currentInput;
+            currentInput += value;
         }
-
-        operator = op;
-        currentInput = "";
     }
 
-    function calculate() {
-        let result = 0;
-        let prev = parseFloat(previousInput);
-        let curr = parseFloat(currentInput);
+    function handleOperator(value) {
+        if (firstOperand === null) {
+            firstOperand = parseFloat(currentInput);
+        } else {
+            calculateResult();
+            firstOperand = parseFloat(currentInput);
+        }
+        operator = value;
+        currentInput = "0";
+    }
 
-        if (isNaN(prev) || isNaN(curr)) return;
+    function calculateResult() {
+        if (firstOperand === null || operator === null) return;
 
+        let secondOperand = parseFloat(currentInput);
         switch (operator) {
-            case "+":
-                result = prev + curr;
-                break;
-            case "-":
-                result = prev - curr;
-                break;
-            case "*":
-                result = prev * curr;
-                break;
-            case "/":
-                result = prev / curr;
-                break;
-            default:
-                return;
+            case "+": firstOperand += secondOperand; break;
+            case "-": firstOperand -= secondOperand; break;
+            case "*": firstOperand *= secondOperand; break;
+            case "/": firstOperand /= secondOperand; break;
         }
 
-        currentInput = result.toString().slice(0, 9);
-        previousInput = "";
-        operator = "";
-        updateScreen(currentInput);
+        currentInput = firstOperand.toString();
+        operator = null;
     }
 
     function resetCalculator() {
-        currentInput = "";
-        previousInput = "";
-        operator = "";
-        updateScreen("0");
+        currentInput = "0";
+        firstOperand = null;
+        operator = null;
     }
 
     function toggleSign() {
-        if (currentInput !== "") {
-            currentInput = (parseFloat(currentInput) * -1).toString();
-            updateScreen(currentInput);
-        }
+        currentInput = (parseFloat(currentInput) * -1).toString();
     }
 
-    function percentage() {
-        if (currentInput !== "") {
-            currentInput = (parseFloat(currentInput) / 100).toString();
-            updateScreen(currentInput);
-        }
+    function applyPercentage() {
+        currentInput = (parseFloat(currentInput) / 100).toString();
     }
 
-    document.querySelectorAll(".number").forEach(button => {
-        button.addEventListener("click", () => {
-            handleNumber(button.dataset.value);
-        });
-    });
-
-    document.querySelectorAll(".operator").forEach(button => {
-        button.addEventListener("click", () => {
-            if (button.dataset.value === "=") {
-                calculate();
-            } else {
-                handleOperator(button.dataset.value);
-            }
-        });
-    });
-
-    document.querySelectorAll(".utility").forEach(button => {
-        button.addEventListener("click", () => {
-            if (button.dataset.value === "AC") {
-                resetCalculator();
-            } else if (button.dataset.value === "+/-") {
-                toggleSign();
-            } else if (button.dataset.value === "%") {
-                percentage();
-            }
-        });
-    });
+    function updateScreen() {
+        screen.textContent = parseFloat(currentInput).toLocaleString();
+    }
 });

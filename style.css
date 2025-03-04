@@ -1,11 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Rounded:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'SF Pro Rounded', sans-serif;
+    user-select: none;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    background-color: black;
+    overflow: hidden;
+}
+
 .calculator {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100dvh; /* iOS 최신 버전 대응 */
+    width: 320px;
+    height: 540px;
+    background-color: black;
+    border-radius: 40px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 20px;
 }
+
+.screen {
+    color: white;
+    font-size: 3rem;
+    text-align: right;
+    padding: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.orange { background-color: #ff9500; color: white; }
+.dark { background-color: #333; color: white; }
+.gray { background-color: #a5a5a5; color: black; }
+.zero { grid-column: span 2; width: 150px; border-radius: 35px; }
