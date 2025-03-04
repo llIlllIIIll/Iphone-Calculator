@@ -3,30 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>특별한 계산기</title>
+    <title>iPhone Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="calculator">
-        <div id="display">0</div>
+        <div class="display" id="display">0</div>
         <div class="buttons">
-            <button class="btn" onclick="pressKey('7')">7</button>
-            <button class="btn" onclick="pressKey('8')">8</button>
-            <button class="btn" onclick="pressKey('9')">9</button>
-            <button class="btn" onclick="clearDisplay()">C</button>
-            <button class="btn" onclick="pressKey('4')">4</button>
-            <button class="btn" onclick="pressKey('5')">5</button>
-            <button class="btn" onclick="pressKey('6')">6</button>
-            <button class="btn" onclick="pressKey('*')">×</button>
-            <button class="btn" onclick="pressKey('1')">1</button>
-            <button class="btn" onclick="pressKey('2')">2</button>
-            <button class="btn" onclick="pressKey('3')">3</button>
-            <button class="btn" onclick="pressKey('+')">+</button>
-            <button class="btn" onclick="pressKey('0')">0</button>
-            <button class="btn" onclick="pressKey('X')">X</button>
-            <button class="btn" onclick="calculate()">=</button>
+            <button class="btn clear" onclick="clearDisplay()">C</button>
+            <button class="btn" onclick="appendNumber('7')">7</button>
+            <button class="btn" onclick="appendNumber('8')">8</button>
+            <button class="btn" onclick="appendNumber('9')">9</button>
+            <button class="btn operator" onclick="setOperator('*')">×</button>
+
+            <button class="btn" onclick="appendNumber('4')">4</button>
+            <button class="btn" onclick="appendNumber('5')">5</button>
+            <button class="btn" onclick="appendNumber('6')">6</button>
+            <button class="btn operator" onclick="setOperator('/')">÷</button>
+
+            <button class="btn" onclick="appendNumber('1')">1</button>
+            <button class="btn" onclick="appendNumber('2')">2</button>
+            <button class="btn" onclick="appendNumber('3')">3</button>
+            <button class="btn operator" onclick="setOperator('-')">−</button>
+
+            <button class="btn" onclick="appendNumber('0')">0</button>
+            <button class="btn" onclick="appendNumber('.')">.</button>
+            <button class="btn equal" onclick="calculateResult()">=</button>
+            <button class="btn operator" onclick="setOperator('+')">+</button>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

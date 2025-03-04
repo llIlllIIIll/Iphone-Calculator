@@ -1,30 +1,69 @@
 let display = document.getElementById("display");
-let equation = "";
-let secretNumber = ""; 
+let currentInput = "";
+let operator = "";
+let firstOperand = null;
+let shouldResetDisplay = false;
 
-function pressKey(value) {
-    if (value === "X") {
-        // 비공개 숫자를 입력하는 단계
-        if (secretNumber.length < 9) {
-            secretNumber += Math.floor(Math.random() * 9) + 1; 
-            display.innerText = secretNumber;
-        }
-    } else {
-        equation += value;
-        display.innerText = equation;
+// 숫자 입력
+function appendNumber(number) {
+    if (shouldResetDisplay) {
+        currentInput = "";
+        shouldResetDisplay = false;
     }
+    currentInput += number;
+    updateDisplay();
 }
 
+// 연산자 설정
+function setOperator(op) {
+    if (firstOperand === null) {
+        firstOperand = parseFloat(currentInput);
+    } else {
+        calculateResult();
+    }
+    operator = op;
+    shouldResetDisplay = true;
+}
+
+// 결과 계산
+function calculateResult() {
+    if (firstOperand === null || operator === "") return;
+
+    let secondOperand = parseFloat(currentInput);
+    let result = 0;
+
+    switch (operator) {
+        case "+":
+            result = firstOperand + secondOperand;
+            break;
+        case "-":
+            result = firstOperand - secondOperand;
+            break;
+        case "*":
+            result = firstOperand * secondOperand;
+            break;
+        case "/":
+            result = secondOperand !== 0 ? firstOperand / secondOperand : "오류";
+            break;
+    }
+
+    firstOperand = result;
+    currentInput = result.toString();
+    operator = "";
+    shouldResetDisplay = true;
+    updateDisplay();
+}
+
+// 화면 업데이트 (3자리마다 콤마 추가)
+function updateDisplay() {
+    display.textContent = parseFloat(currentInput).toLocaleString("ko-KR");
+}
+
+// 화면 초기화
 function clearDisplay() {
-    equation = "";
-    secretNumber = "";
-    display.innerText = "0";
-}
-
-function calculate() {
-    let publicResult = eval(equation); // 공개 숫자 결과
-    let finalNumber = 248240749; // 예제: 24년 8월 24일 07시 49분
-
-    let X = finalNumber / publicResult; 
-    display.innerText = X.toFixed(0);
+    currentInput = "";
+    firstOperand = null;
+    operator = "";
+    shouldResetDisplay = false;
+    display.textContent = "0";
 }

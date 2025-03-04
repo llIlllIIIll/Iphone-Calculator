@@ -1,48 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: #f0f0f0;
+    background-color: black;
+    overflow: hidden;
 }
 
 .calculator {
     width: 300px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background: #333;
+    border-radius: 20px;
     padding: 20px;
-    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-#display {
+.display {
     width: 100%;
-    height: 60px;
-    background: #222;
+    height: 80px;
+    background: black;
     color: white;
     text-align: right;
-    font-size: 2em;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    padding: 20px;
+    font-size: 2rem;
+    border-radius: 10px;
 }
 
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
+    margin-top: 20px;
 }
 
 .btn {
     width: 100%;
-    height: 50px;
-    font-size: 1.5em;
+    height: 60px;
     border: none;
-    background: #ddd;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
     cursor: pointer;
-    border-radius: 5px;
 }
 
-.btn:active {
-    background: #bbb;
+.btn.operator {
+    background: orange;
+    color: white;
+}
+
+.btn.equal {
+    background: green;
+    color: white;
+}
+
+.btn.clear {
+    background: red;
+    color: white;
 }
