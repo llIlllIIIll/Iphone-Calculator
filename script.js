@@ -59,6 +59,13 @@ document.addEventListener("DOMContentLoaded", () => {
         operator = null;
     }
 
+    function resetCalculator() {
+        currentInput = "0";
+        firstOperand = null;
+        operator = null;
+        updateScreen();
+    }
+
     function updateScreen() {
         screen.textContent = parseFloat(currentInput).toLocaleString();
     }
