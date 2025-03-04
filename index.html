@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iPhone Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="style.css">
+    <title>iPhone Calculator</title>
 </head>
 <body>
     <div class="calculator">
-        <div class="display">0</div>
+        <div class="screen" id="screen">0</div>
         <div class="buttons">
-            <button class="btn gray">AC</button>
-            <button class="btn gray">+/-</button>
-            <button class="btn gray">%</button>
-            <button class="btn orange">÷</button>
-
-            <button class="btn dark">7</button>
-            <button class="btn dark">8</button>
-            <button class="btn dark">9</button>
-            <button class="btn orange">×</button>
-
-            <button class="btn dark">4</button>
-            <button class="btn dark">5</button>
-            <button class="btn dark">6</button>
-            <button class="btn orange">−</button>
-
-            <button class="btn dark">1</button>
-            <button class="btn dark">2</button>
-            <button class="btn dark">3</button>
-            <button class="btn orange">+</button>
-
-            <button class="btn zero dark">0</button>
-            <button class="btn dark">.</button>
-            <button class="btn orange">=</button>
+            <button class="utility">AC</button>
+            <button class="utility">+/-</button>
+            <button class="utility">%</button>
+            <button class="operator">÷</button>
+            <button class="number">7</button>
+            <button class="number">8</button>
+            <button class="number">9</button>
+            <button class="operator">×</button>
+            <button class="number">4</button>
+            <button class="number">5</button>
+            <button class="number">6</button>
+            <button class="operator">−</button>
+            <button class="number">1</button>
+            <button class="number">2</button>
+            <button class="number">3</button>
+            <button class="operator">+</button>
+            <button class="zero number">0</button>
+            <button class="number">.</button>
+            <button class="operator">=</button>
         </div>
     </div>
     <script src="script.js"></script>

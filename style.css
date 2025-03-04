@@ -1,32 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;700&display=swap');
-
-* {
+html, body {
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'SF Pro Display', sans-serif;
-    user-select: none;
-}
-
-body {
+    background-color: black;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: black;
-    overflow: hidden;
+    touch-action: manipulation;
+}
+
+body {
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 .calculator {
-    width: 320px;
-    height: 540px;
-    background-color: black;
-    border-radius: 40px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    padding: 20px;
+    width: 100vw;
+    height: 100vh;
+    max-width: 430px;
+    max-height: 932px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 20px;
+    border-radius: 40px;
 }
 
 .screen {
