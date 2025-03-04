@@ -65,6 +65,20 @@ document.addEventListener("DOMContentLoaded", () => {
         updateScreen("0");
     }
 
+    function toggleSign() {
+        if (currentInput !== "") {
+            currentInput = (parseFloat(currentInput) * -1).toString();
+            updateScreen(currentInput);
+        }
+    }
+
+    function percentage() {
+        if (currentInput !== "") {
+            currentInput = (parseFloat(currentInput) / 100).toString();
+            updateScreen(currentInput);
+        }
+    }
+
     document.querySelectorAll(".number").forEach(button => {
         button.addEventListener("click", () => {
             handleNumber(button.textContent);
@@ -81,5 +95,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    document.querySelector(".utility").addEventListener("click", resetCalculator);
+    document.querySelectorAll(".utility").forEach(button => {
+        button.addEventListener("click", () => {
+            if (button.textContent === "AC") {
+                resetCalculator();
+            } else if (button.textContent === "+/-") {
+                toggleSign();
+            } else if (button.textContent === "%") {
+                percentage();
+            }
+        });
+    });
 });
