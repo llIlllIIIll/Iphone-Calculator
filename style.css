@@ -1,3 +1,17 @@
+/* 기본 배경 색상 (라이트 모드) */
+body {
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* 다크 모드 설정 */
+body.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+/* 버튼 스타일 */
 .buttons {
     display: grid;
     grid-template-columns: 0.8fr 0.8fr 0.8fr 1fr;
@@ -20,4 +34,19 @@
 
 .btn:active {
     transform: scale(0.85);
+}
+
+/* 다크 모드 버튼 색상 변경 */
+.dark-mode .btn {
+    background-color: #333;
+    color: white;
+}
+
+.dark-mode .btn.orange {
+    background-color: #ff9500;
+}
+
+.dark-mode .btn.gray {
+    background-color: #a5a5a5;
+    color: black;
 }
