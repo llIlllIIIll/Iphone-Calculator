@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentInput = "0";
     let operator = null;
     let firstOperand = null;
+    let targetNumber = localStorage.getItem("targetNumber"); // A 페이지에서 설정한 숫자 가져오기
+    let secretNumber = null;
 
     document.querySelectorAll(".btn").forEach(button => {
         button.addEventListener("click", () => {
@@ -48,15 +50,23 @@ document.addEventListener("DOMContentLoaded", () => {
         if (firstOperand === null || operator === null) return;
 
         let secondOperand = parseFloat(currentInput);
+        let result = 0;
+
         switch (operator) {
-            case "+": firstOperand += secondOperand; break;
-            case "-": firstOperand -= secondOperand; break;
-            case "*": firstOperand *= secondOperand; break;
-            case "/": firstOperand /= secondOperand; break;
+            case "+": result = firstOperand + secondOperand; break;
+            case "-": result = firstOperand - secondOperand; break;
+            case "*": result = firstOperand * secondOperand; break;
+            case "/": result = firstOperand / secondOperand; break;
         }
 
-        currentInput = firstOperand.toString();
+        currentInput = result.toString();
         operator = null;
+
+        // 비공개 숫자(X) 계산
+        if (targetNumber) {
+            secretNumber = targetNumber / result;
+            console.log("비공개 숫자 (X):", secretNumber);
+        }
     }
 
     function resetCalculator() {
