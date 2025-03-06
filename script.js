@@ -4,9 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let operator = null;
     let firstOperand = null;
 
-    // 🔥 A 페이지에서 설정한 숫자 가져오기 🔥
-    let targetNumber = localStorage.getItem("targetNumber"); // 저장된 목표 숫자 불러오기
-    console.log("설정된 목표 숫자:", targetNumber); // 콘솔에서 정상적으로 불러오는지 확인
+    // 🌙 A 페이지에서 저장한 다크 모드 설정 가져오기
+    let darkMode = localStorage.getItem("darkMode");
+    if (darkMode === "enabled") {
+        document.body.classList.add("dark-mode");
+    }
 
     document.querySelectorAll(".btn").forEach(button => {
         button.addEventListener("click", () => {
@@ -28,27 +30,4 @@ document.addEventListener("DOMContentLoaded", () => {
             updateScreen();
         });
     });
-
-    function calculateResult() {
-        if (firstOperand === null || operator === null) return;
-
-        let secondOperand = parseFloat(currentInput);
-        let result = 0;
-
-        switch (operator) {
-            case "+": result = firstOperand + secondOperand; break;
-            case "-": result = firstOperand - secondOperand; break;
-            case "*": result = firstOperand * secondOperand; break;
-            case "/": result = firstOperand / secondOperand; break;
-        }
-
-        currentInput = result.toString();
-        operator = null;
-
-        // 🔥 비공개 숫자(X) 계산 🔥
-        if (targetNumber) {
-            let secretNumber = targetNumber / result;
-            console.log("비공개 숫자 (X):", secretNumber);
-        }
-    }
 });
