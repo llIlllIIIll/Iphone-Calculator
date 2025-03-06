@@ -3,8 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentInput = "0";
     let operator = null;
     let firstOperand = null;
-    let targetNumber = localStorage.getItem("targetNumber"); // A 페이지에서 설정한 숫자 가져오기
-    let secretNumber = null;
+
+    // 🔥 A 페이지에서 설정한 숫자 가져오기 🔥
+    let targetNumber = localStorage.getItem("targetNumber"); // 저장된 목표 숫자 불러오기
+    console.log("설정된 목표 숫자:", targetNumber); // 콘솔에서 정상적으로 불러오는지 확인
 
     document.querySelectorAll(".btn").forEach(button => {
         button.addEventListener("click", () => {
@@ -27,25 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    function handleNumber(value) {
-        if (currentInput === "0" && value !== ".") {
-            currentInput = value;
-        } else {
-            currentInput += value;
-        }
-    }
-
-    function handleOperator(value) {
-        if (firstOperand === null) {
-            firstOperand = parseFloat(currentInput);
-        } else {
-            calculateResult();
-            firstOperand = parseFloat(currentInput);
-        }
-        operator = value;
-        currentInput = "0";
-    }
-
     function calculateResult() {
         if (firstOperand === null || operator === null) return;
 
@@ -62,21 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
         currentInput = result.toString();
         operator = null;
 
-        // 비공개 숫자(X) 계산
+        // 🔥 비공개 숫자(X) 계산 🔥
         if (targetNumber) {
-            secretNumber = targetNumber / result;
+            let secretNumber = targetNumber / result;
             console.log("비공개 숫자 (X):", secretNumber);
         }
-    }
-
-    function resetCalculator() {
-        currentInput = "0";
-        firstOperand = null;
-        operator = null;
-        updateScreen();
-    }
-
-    function updateScreen() {
-        screen.textContent = parseFloat(currentInput).toLocaleString();
     }
 });
