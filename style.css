@@ -1,11 +1,23 @@
-.calculator {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100dvh; /* iOS 최신 버전 대응 */
+.buttons {
+    display: grid;
+    grid-template-columns: 0.8fr 0.8fr 0.8fr 1fr;
+    gap: 10px;
+}
+
+.btn {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    font-size: 1.7rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s ease-in-out;
+}
+
+.btn:active {
+    transform: scale(0.85);
 }
