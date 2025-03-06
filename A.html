@@ -5,15 +5,38 @@
     <title>설정 페이지</title>
 </head>
 <body>
+    <h2>설정</h2>
+    
+    <label>
+        <input type="checkbox" id="darkModeToggle"> 다크 모드 활성화
+    </label>
+
     <h2>목표 숫자 설정</h2>
     <input type="number" id="targetNumber" placeholder="목표 숫자를 입력하세요">
-    <button onclick="saveTargetNumber()">저장</button>
+    <button onclick="saveSettings()">저장</button>
 
     <script>
-        function saveTargetNumber() {
+        // 🌙 다크 모드 토글 기능
+        const darkModeToggle = document.getElementById("darkModeToggle");
+
+        // 기존 설정 불러오기
+        if (localStorage.getItem("darkMode") === "enabled") {
+            darkModeToggle.checked = true;
+        }
+
+        darkModeToggle.addEventListener("change", () => {
+            if (darkModeToggle.checked) {
+                localStorage.setItem("darkMode", "enabled");
+            } else {
+                localStorage.setItem("darkMode", "disabled");
+            }
+        });
+
+        // 목표 숫자 저장
+        function saveSettings() {
             const target = document.getElementById("targetNumber").value;
             localStorage.setItem("targetNumber", target);
-            alert("목표 숫자가 저장되었습니다!");
+            alert("설정이 저장되었습니다!");
         }
     </script>
 </body>
