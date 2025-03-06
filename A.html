@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>설정 페이지</title>
+</head>
+<body>
+    <h2>목표 숫자 설정</h2>
+    <input type="number" id="targetNumber" placeholder="목표 숫자를 입력하세요">
+    <button onclick="saveTargetNumber()">저장</button>
+
+    <script>
+        function saveTargetNumber() {
+            const target = document.getElementById("targetNumber").value;
+            localStorage.setItem("targetNumber", target);
+            alert("목표 숫자가 저장되었습니다!");
+        }
+    </script>
+</body>
+</html>
