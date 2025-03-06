@@ -1,91 +1,42 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const screen = document.getElementById("screen");
-    let currentInput = "0";
-    let operator = null;
-    let firstOperand = null;
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>iPhone Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="screen" id="screen">0</div>
+        <div class="buttons">
+            <button class="btn gray" data-value="AC">AC</button>
+            <button class="btn gray" data-value="+/-">+/-</button>
+            <button class="btn gray" data-value="%">%</button>
+            <button class="btn orange" data-value="/">÷</button>
 
-    // 🌙 A 페이지에서 저장한 다크 모드 설정 가져오기
-    let darkMode = localStorage.getItem("darkMode");
-    if (darkMode === "enabled") {
-        document.body.classList.add("dark-mode");
-    }
+            <button class="btn dark" data-value="7">7</button>
+            <button class="btn dark" data-value="8">8</button>
+            <button class="btn dark" data-value="9">9</button>
+            <button class="btn orange" data-value="*">×</button>
 
-    // 버튼 클릭 이벤트
-    document.querySelectorAll(".btn").forEach(button => {
-        button.addEventListener("click", () => {
-            const value = button.dataset.value;
+            <button class="btn dark" data-value="4">4</button>
+            <button class="btn dark" data-value="5">5</button>
+            <button class="btn dark" data-value="6">6</button>
+            <button class="btn orange" data-value="-">−</button>
 
-            if (!isNaN(value) || value === ".") {
-                handleNumber(value);
-            } else if (value === "AC") {
-                resetCalculator();
-            } else if (value === "+/-") {
-                toggleSign();
-            } else if (value === "%") {
-                applyPercentage();
-            } else if (value === "=") {
-                calculateResult();
-            } else {
-                handleOperator(value);
-            }
-            updateScreen();
-        });
-    });
+            <button class="btn dark" data-value="1">1</button>
+            <button class="btn dark" data-value="2">2</button>
+            <button class="btn dark" data-value="3">3</button>
+            <button class="btn orange" data-value="+">+</button>
 
-    function handleNumber(value) {
-        if (currentInput === "0" && value !== ".") {
-            currentInput = value; // 첫 번째 숫자 입력시 "0" 대신 입력된 값으로 변경
-        } else {
-            currentInput += value; // 그 외 숫자는 기존 입력 뒤에 이어 붙이기
-        }
-    }
-
-    function resetCalculator() {
-        currentInput = "0";
-        operator = null;
-        firstOperand = null;
-    }
-
-    function toggleSign() {
-        currentInput = (parseFloat(currentInput) * -1).toString();
-    }
-
-    function applyPercentage() {
-        currentInput = (parseFloat(currentInput) / 100).toString();
-    }
-
-    function calculateResult() {
-        if (firstOperand !== null && operator !== null) {
-            switch (operator) {
-                case "+":
-                    currentInput = (firstOperand + parseFloat(currentInput)).toString();
-                    break;
-                case "-":
-                    currentInput = (firstOperand - parseFloat(currentInput)).toString();
-                    break;
-                case "*":
-                    currentInput = (firstOperand * parseFloat(currentInput)).toString();
-                    break;
-                case "/":
-                    currentInput = (firstOperand / parseFloat(currentInput)).toString();
-                    break;
-            }
-            operator = null;
-            firstOperand = null;
-        }
-    }
-
-    function handleOperator(value) {
-        if (firstOperand === null) {
-            firstOperand = parseFloat(currentInput);
-        } else if (operator !== null) {
-            calculateResult();
-        }
-        operator = value;
-        currentInput = "0";
-    }
-
-    function updateScreen() {
-        screen.textContent = currentInput;
-    }
-});
+            <button class="btn zero dark" data-value="0">0</button>
+            <button class="btn dark" data-value=".">.</button>
+            <button class="btn orange" data-value="=">=</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
