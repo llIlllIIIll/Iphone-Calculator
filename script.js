@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (darkMode === "enabled") {
         document.body.classList.add("dark-mode");
     }
-
+ 
     setTimeout(() => {
         if (darkMode === "enabled") {
             document.body.classList.add("dark-mode");
