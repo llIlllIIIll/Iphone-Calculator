@@ -17,3 +17,19 @@ body {
     justify-content: flex-end;
     overflow: hidden;
 }
+.calculator {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    height: 75vh;
+    background-color: black;
+    border-radius: 40px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
